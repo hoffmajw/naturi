@@ -1,12 +1,108 @@
 body {
-    background: #DDDDDD;
+    background: #48575E;
+}
+
+.btn-dark {
+    color: white;
+    background-color: #699b2c;
+}
+
+.btn-check:active+.btn-dark, .btn-check:checked+.btn-dark, .btn-dark.active, .btn-dark:active, .show>.btn-dark.dropdown-toggle {
+    color: white;
+    background-color: #699b2c;
+}
+
+.btn-dark.focus, .btn-dark:focus, .btn-dark:hover {
+    color: #fff;
+    background-color: #699b2c;
+}
+
+.cancelButton {
+    background-color: #909689;
+}
+
+.container {
+    padding: 0px;
+}
+
+.form-outline {
+    margin: 0px 20%;
+}
+
+.form-outline .form-control {
+    background-color: #151C15;
+}
+
+.form-outline .form-control~.form-label {
+    color: white !important;
+}
+
+.modal-content {
+    background-color: #B8CF69;
+}
+
+.my-modal-header {
+    text-align: center;
+    margin-top: 15px;
+    color: #435A00;
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
 }
 
 .navbar {
-    background-color: #800000;
+    font-size: 20px;
+    background-color: #435A00;
     color: white;
 }
 
-.page-container {
-    margin-top: 75px;
+.navbar .navbar-brand {
+    font-size: 25px;
+    position: relative;
+}
+
+.recentBlogEntry {
+    background-color: #435A00;
+    border-radius: 5px;
+    color: white;
+    margin: 0px 20px;
+}
+
+.recent-entry-author {
+    color: #B8CF69;
+}
+
+.recent-entry-text {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+#photoCaption {
+    background-color: #699b2c;
+    color: white;
+    padding: 0px 10px;
+}
+
+#recentBlogEntries {
+    background-color: #699b2c;
+    border-radius: 5px;
+    margin: 20px 20px;
+    padding-bottom: 10px;
+}
+
+#recentBlogEntriesHeader {
+    color: white;
+    font-size: 20px;
+    padding: 10px 0px;
+    text-align: center;
 }

@@ -4,23 +4,173 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css"> -->
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <title>App Name</title>
+  <title>Naturi</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">App Name</a>
+  <!-- As a link -->
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Naturi</a>
+      <span>
+        <button type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#logInDialog">Log In</button>
+        <button type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#signUpDialog">Sign Up</button>
+      </span>
+    </div>
   </nav>
   <div id="mainPage" class="container page-container">
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-mdb-ride="carousel">
+      <ol class="carousel-indicators">
+        <li
+          data-mdb-target="#carouselExampleIndicators"
+          data-mdb-slide-to="0"
+          class="active"
+        ></li>
+        <li data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="images/hiking.png"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="images/whiteWaterRafting.png"
+            class="d-block w-100"
+            alt="..."
+          />
+        </div>
+      </div>
+      <a
+        class="carousel-control-prev"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-mdb-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-mdb-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </a>
+    </div>
 
+    <div id="photoCaptionContainer">
+      <p id="photoCaption">Planning a trip to Colorado anytime soon? Check out some things to do in the Denver area. The picture above is from a traveller’s day white water rafting just outside Denver. </p>
+    </div>
 
+    <div class="form-outline">
+      <input type="search" id="searchForm" class="form-control" />
+      <label class="form-label" for="form1">Search for a place</label>
+    </div>
+
+    <div id="recentBlogEntries">
+      <h1 id="recentBlogEntriesHeader">Recent Blog Entries</h1>
+    
+      <div class="recentBlogEntry">
+        <p class="recent-entry-text"><span>Red Rocks, Colorado</span>&nbsp;<span class="recent-entry-author">by Jaxon Hoffman</span></p>
+      </div>
+      <div class="recentBlogEntry">
+        <p class="recent-entry-text"><span>Rickwood Caverns, Alabama</span>&nbsp;<span class="recent-entry-author">by Anastasia Zellner</span></p>
+      </div>
+      <div class="recentBlogEntry">
+        <p class="recent-entry-text"><span>Sarasota, Florida</span>&nbsp;<span class="recent-entry-author">by Billy Joel</span></p>
+      </div>
+      <div class="recentBlogEntry">
+        <p class="recent-entry-text"><span>Toronto, Canada</span>&nbsp;<span class="recent-entry-author">by Jaxon Hoffman</span></p>
+      </div>
+    </div>
   </div>
-  <script src="scripts/jquery.min.js"></script>
+
+  <!-- Log In Modal -->
+  <div class="modal fade" id="logInDialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="my-modal-header">
+          <h5>Log In To Naturi</h5>
+        </div>
+
+        <div class="form-outline">
+          <input type="input" id="logInEmailForm" class="form-control" />
+          <label class="form-label" for="logInEmailForm">Email</label>
+        </div>
+
+        <div class="form-outline">
+          <input type="input" id="logInInputPasswordForm" class="form-control" />
+          <label class="form-label" for="logInInputPasswordForm">Password</label>
+        </div>
+        
+        <div class="modal-footer">
+          <button id="logInButton" type="button" class="btn btn-dark" data-mdb-dismiss="modal">Log In</button>
+          <button type="button" class="cancelButton btn btn-dark">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div class="modal fade" id="signUpDialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="my-modal-header">
+          <h5>Create An Account With Naturi</h5>
+        </div>
+
+        <div class="form-outline">
+          <input type="input" id="signUpInputDisplayName" class="form-control" />
+          <label class="form-label" for="signUpInputDisplayName">Display Name</label>
+        </div>
+
+        <div class="form-outline">
+          <input type="input" id="signUpInputEmail" class="form-control" />
+          <label class="form-label" for="signUpInputEmail">Email</label>
+        </div>
+
+        <div class="form-outline">
+          <input type="input" id="signUpInputPassword" class="form-control" />
+          <label class="form-label" for="signUpInputPassword">Password</label>
+        </div>
+
+        <div class="form-outline">
+          <input type="input" id="signUpInputConfirmPassword" class="form-control" />
+          <label class="form-label" for="signUpInputConfirmPassword">Confirm Password</label>
+        </div>
+        
+        <div class="modal-footer">
+          <button id="signUpButton" type="button" class="btn btn-dark" data-mdb-dismiss="modal">Sign Up</button>
+          <button type="button" class="cancelButton btn btn-dark">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>
-  <script src="scripts/bootstrap-material-design.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.js"></script>
   <script>$("body").bootstrapMaterialDesign();</script>
   <script src="/__/firebase/7.18.0/firebase-app.js"></script>
   <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
