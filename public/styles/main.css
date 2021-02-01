@@ -1,5 +1,6 @@
 body {
     background: #48575E;
+    width: 100vw;
 }
 
 .btn-dark {
@@ -85,6 +86,12 @@ body {
 
 .form-control {
     margin-bottom: 10px;
+}
+
+#mainPage {
+    margin: 0px;
+    min-width: 100vw;
+    width: 100vw;
 }
 
 #photoCaption {
