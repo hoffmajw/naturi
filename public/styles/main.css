@@ -100,6 +100,65 @@ body {
     padding: 0px 10px;
 }
 
+#photoCaption {
+    background-color: #699b2c;
+    color: white;
+    padding: 0px 10px;
+}
+
+#postTitleContainer {
+    background-color: #699b2c;
+    color: white;
+    padding: 0px 10px;
+    text-align: center;
+}
+
+#postContainer {
+    height: 70vw;
+    margin: 15px;
+    background-color: #151C15;
+    overflow: auto;
+    border-radius: 5px;
+}
+
+.post {
+    background-color: #435A00;
+    color: #FFFFFF;
+    margin: 5px;
+    padding: 0px 5px;
+    float: left;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.postText {
+    padding-top: 5px;
+    padding-bottom:0px;
+    line-height: 110%;
+}
+
+.comment {
+    background-color: #B8CF69;
+    color: #435A00;
+    margin: 5px;
+    padding: 0px 5px;
+    float: right;
+    font-size: 14px;
+    text-align: right;
+    width: 90%;
+    border-radius: 5px;
+    line-height: 110%;
+}
+.commentAuthor {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+#addCommentButton {
+    float:right;
+    margin: 0px 15px;
+}
+
 #recentBlogEntries {
     background-color: #699b2c;
     border-radius: 5px;
