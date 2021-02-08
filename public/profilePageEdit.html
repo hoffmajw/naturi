@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css"> -->
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Naturi</title>
+</head>
+
+<body>
+  <!-- As a link -->
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Naturi</a>
+      
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+        </button>
+        <ul id="navMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="/profilePagePosts.html">View Profile</a></li>
+          <li><a class="dropdown-item" href="/createPost.html">Create Post</a></li>
+          <li><a class="dropdown-item" href="#">Log Out</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+  <div id="mainPage" class="container page-container">
+    
+    <div id="profileHeader" class="container">
+      <img id="profilePic" src="https://www.jaxonhoffman.com/webprofilepic.png">
+      <div id="profileInfo">
+        <h1 id="displayName">Jaxon Hoffman</h1>
+
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownImageSelect" data-mdb-toggle="dropdown" aria-expanded="false">
+            Edit Profile Photo
+          </button>
+          <ul id="photoMenu" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownImageSelect">
+            <li>
+              <label id="photoFileLabel" class="form-label" for="customFile">Select a photo</label>
+              <input type="file" class="form-control" id="customFile" />
+            </li>
+            <button id="uploadPhotoBtn" type="button" class="btn btn-dark" data-mdb-dismiss="modal">Confirm</button>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="editFormContainer">
+
+      <div class="form-outline">
+        <input type="email" id="newEmailForm" class="form-control" />
+        <label class="form-label" for="newEmailForm">Email</label>
+      </div>
+
+      <div class="form-outline">
+        <input type="input" id="newDisplayNameForm" class="form-control" />
+        <label class="form-label" for="newDisplayNameForm">Display Name</label>
+      </div>
+
+      <div class="form-outline">
+        <input type="password" id="oldPasswordForm" class="form-control" />
+        <label class="form-label" for="oldPasswordForm">Old Password</label>
+      </div>
+
+      <div class="form-outline">
+        <input type="password" id="newPasswordForm" class="form-control" />
+        <label class="form-label" for="newPasswordForm">New Password</label>
+      </div>
+
+      <div class="form-outline">
+        <input type="password" id="confirmNewPasswordForm" class="form-control" />
+        <label class="form-label" for="confirmNewPasswordForm">Confirm New Password</label>
+      </div>
+
+      <div id="editFormButtons">
+        <button id="logInButton" type="button" class="btn btn-dark edit-form-btn" data-mdb-dismiss="modal">Confirm</button>
+        <button type="button" class="cancelButton btn btn-dark edit-form-btn">Cancel</button>
+      </div>
+      
+    </div>
+  </div>
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <!-- <script src="scripts/bootstrap-material-design.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
+  <script type='text/javascript' src='http://d3js.org/topojson.v1.min.js'></script>
+  <script type='text/javascript' src='path/to/planetaryjs.min.js'></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
