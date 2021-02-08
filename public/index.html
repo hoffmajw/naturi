@@ -26,8 +26,21 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Naturi</a>
       <span>
-        <button type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#logInDialog">Log In</button>
-        <button type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#signUpDialog">Sign Up</button>
+        <span id="menu">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+            </button>
+            <ul id="navMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="/profilePagePosts.html">View Profile</a></li>
+              <li><a class="dropdown-item" href="/createPost.html">Create Post</a></li>
+              <li><a id="logOutButton" class="dropdown-item" href="#">Log Out</a></li>
+            </ul>
+          </div>
+        </span>
+
+        <button id="attemptLogIn" type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#logInDialog">Log In</button>
+        <button id="attemptSignUp" type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#signUpDialog">Sign Up</button>
       </span>
     </div>
   </nav>
@@ -150,12 +163,12 @@
         </div>
 
         <div class="form-outline">
-          <input type="input" id="signUpInputPassword" class="form-control" />
+          <input type="password" id="signUpInputPassword" class="form-control" />
           <label class="form-label" for="signUpInputPassword">Password</label>
         </div>
 
         <div class="form-outline">
-          <input type="input" id="signUpInputConfirmPassword" class="form-control" />
+          <input type="password" id="signUpInputConfirmPassword" class="form-control" />
           <label class="form-label" for="signUpInputConfirmPassword">Confirm Password</label>
         </div>
         
@@ -167,9 +180,9 @@
     </div>
   </div>
 
-  <!-- <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>
-  <script src="scripts/bootstrap-material-design.js"></script> -->
+  <script src="scripts/bootstrap-material-design.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.js"></script>
   <script>$("body").bootstrapMaterialDesign();</script>
   <script src="/__/firebase/7.18.0/firebase-app.js"></script>

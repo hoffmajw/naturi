@@ -193,6 +193,10 @@ body {
     width: 100vw;
 }
 
+#menu {
+    display: none;
+}
+
 #navMenu {
     background-color: #303030;
     left: -90px;
@@ -218,6 +222,10 @@ body {
     background-color: #151C15;
     overflow: auto;
     border-radius: 5px;
+}
+
+#profileName {
+    display: none;
 }
 
 .post {
