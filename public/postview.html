@@ -17,14 +17,14 @@
 />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.1.0/mdb.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <title>Naturi</title>
+  <title>View Post</title>
 </head>
 
 <body>
   <!-- As a link -->
   <nav class="navbar navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Naturi</a>
+      <a class="navbar-brand" href="index.html">Naturi</a>
       <span>
         <button type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#logInDialog">Log In</button>
         <button type="button" class="btn btn-dark" data-mdb-toggle="modal" data-mdb-target="#signUpDialog">Sign Up</button>
@@ -78,29 +78,40 @@
       </a>
     </div>
 
-    <div id="photoCaptionContainer">
-      <p id="photoCaption">Planning a trip to Colorado anytime soon? Check out some things to do in the Denver area. The picture above is from a traveller’s day white water rafting just outside Denver. </p>
+    <div id="postTitleContainer">
+      <h1 id="postTitle">White Water Rafting</h1>
+      <p id="postMeta"><span id="postLocation">Red Rocks, Colorado</span>&emsp;<span id="postAuthor">Jaxon Hoffman</span></p>
     </div>
 
-    <div class="form-outline">
-      <input type="search" id="searchForm" class="form-control" />
-      <label class="form-label" for="form1">Search for a place</label>
+    <div id="postContainer">
+      <div class="post">
+          <p class="postText">Fair warning, rafting in Colorado is not on the cheap spectrum. It will cost about $75 per person. I got to enjoy different grades of rapids so I could both experience the nature around me and have an exhilarating time. You will have a guide with you to help navigate the rapids. </p>
+        </div>
+      <div class="comment">
+          <h2 class="commentAuthor">Billy Joel</h2>
+          <p class="commentText">Thanks for the info Jaxon. I want to check this out on my CO trip next year!</p>
+      </div>
     </div>
+    <button type="button" class="btn btn-dark" id="addCommentButton" data-mdb-toggle="modal" data-mdb-target="#addCommentDialog">Add Comment</button>
+  </div>
 
-    <div id="recentBlogEntries">
-      <h1 id="recentBlogEntriesHeader">Recent Blog Entries</h1>
-    
-      <div class="recentBlogEntry">
-        <a href="postview.html"><p class= "recent-entry-text"><span>Red Rocks, Colorado</span>&nbsp;<span class="recent-entry-author">by Jaxon Hoffman</span></p></a>
-      </div>
-      <div class="recentBlogEntry">
-        <p class="recent-entry-text"><span>Rickwood Caverns, Alabama</span>&nbsp;<span class="recent-entry-author">by Anastasia Zellner</span></p>
-      </div>
-      <div class="recentBlogEntry">
-        <p class="recent-entry-text"><span>Sarasota, Florida</span>&nbsp;<span class="recent-entry-author">by Billy Joel</span></p>
-      </div>
-      <div class="recentBlogEntry" style="margin-bottom: 10px;">
-        <p class="recent-entry-text"><span>Toronto, Canada</span>&nbsp;<span class="recent-entry-author">by Jaxon Hoffman</span></p>
+  <!-- Add Comment Modal -->
+  <div class="modal fade" id="addCommentDialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="my-modal-header">
+          <h5>Add Comment</h5>
+        </div>
+
+        <div class="form-outline">
+          <input type="input" id="addCommentForm" class="form-control" />
+          <label class="form-label" for="addCommentForm">Add your comment here...</label>
+        </div>
+        
+        <div class="modal-footer">
+          <button id="confirmButton" type="button" class="btn btn-dark" data-mdb-dismiss="modal">Confirm</button>
+          <button type="button" class="cancelButton btn btn-dark">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
@@ -119,7 +130,7 @@
         </div>
 
         <div class="form-outline">
-          <input type="password" id="logInInputPasswordForm" class="form-control" />
+          <input type="input" id="logInInputPasswordForm" class="form-control" />
           <label class="form-label" for="logInInputPasswordForm">Password</label>
         </div>
         
