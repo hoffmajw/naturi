@@ -7,6 +7,25 @@ body {
     width: 100vw;
 }
 
+.form-control::-webkit-input-placeholder {
+    color: white;
+  }
+
+.bmd-form-group {
+ min-width: 75%;
+ margin-bottom: 0px;
+}
+
+.bmd-label-floating {
+    color: white;
+    padding: 0px 5px;
+}
+
+.btn-dark.custom-file-control:before, .btn.btn-dark {
+    color: white;
+    background-color: #699b2c;
+}
+
 .btn-dark {
     color: white;
     background-color: #699b2c;
@@ -23,7 +42,7 @@ body {
 }
 
 .cancelButton, .cancelButton:hover {
-    background-color: #909689;
+    background-color: #909689 !important;
 }
 
 .container {
@@ -42,8 +61,10 @@ body {
     margin: 0px 20%;
 }
 
-.form-outline .form-control {
+.form-control {
     background-color: #151C15;
+    border-radius: 5px;
+    margin-bottom: 0px !important;
 }
 
 .form-outline .form-control~.form-label {
@@ -129,6 +150,7 @@ body {
 }
 
 .form-control {
+    background-color: #303030;
     margin-bottom: 10px;
 }
 
@@ -157,10 +179,12 @@ body {
 }
 
 #dropdownMenuButton {
+    color: white;
     background-color: #699b2c;
 }
 
 #dropdownImageSelect {
+    color: white;
     background-color: #435A00;
 }
 
@@ -181,6 +205,9 @@ body {
 #editFormContainer {
     margin: 20px;
     background: #B8CF69;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
     border-radius: 5px;
     padding-bottom: 10px;
@@ -226,6 +253,10 @@ body {
 
 #profileName {
     display: none;
+}
+
+#searchForm {
+    min-width: 100%;
 }
 
 .post {
@@ -311,7 +342,10 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 20px 20px;
-    
+}
+
+#mainPage #recentBlogEntries  {
+    padding: 15px 0px;
 }
 
 #recentBlogEntriesHeader {
