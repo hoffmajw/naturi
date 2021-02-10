@@ -350,7 +350,7 @@ rhit.CreatePostPageController = class {
 }
 
 rhit.PostPageController = class {
-	constructor(uid) {
+	constructor() {
 	}
 }
 
