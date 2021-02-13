@@ -49,6 +49,16 @@ body {
     padding: 0px;
 }
 
+.crop {
+    height: 20vh;
+}
+
+.cropped {
+    width: 153px;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
 .dropdown-item {
     color: white;
 }
@@ -171,6 +181,7 @@ body {
 
 #createPostHeader {
     background-color: #699b2c;
+    color: white;
     display: flex;
     flex-direction: column;
     height: 25vh;
@@ -244,7 +255,8 @@ body {
 }
 
 #postContainer {
-    height: 70vw;
+    padding: 5px;
+    height: 50vh;
     margin: 15px;
     background-color: #151C15;
     overflow: auto;
@@ -292,6 +304,11 @@ body {
     padding-top: 5px;
 }
 
+.group-form {
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
 #addCommentButton {
     float:right;
     margin: 0px 15px;
@@ -314,13 +331,14 @@ body {
     flex-direction: row;
     height: 25vh;
     justify-content: space-evenly;
-    padding: 25px;
+    padding: 25px 0px;
 }
 
 #profileInfo {
     align-items: center;
     color: white;
     display: flex;
+    text-align: center;
     flex-direction: column;
     padding-top: 5%;
 }
