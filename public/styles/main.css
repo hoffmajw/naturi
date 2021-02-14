@@ -57,6 +57,8 @@ body {
     width: 153px;
     aspect-ratio: 1/1;
     overflow: hidden;
+    margin-left: 7%;
+    padding: 2% 0;
 }
 
 .dropdown-item {
@@ -100,11 +102,21 @@ body {
     font-size: 20px;
     background-color: #435A00;
     color: white;
+    padding-right: 0;
 }
 
 .navbar .navbar-brand {
     font-size: 25px;
     position: relative;
+}
+
+.navbar, .navbar>.container, .navbar>.container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 2%;
+    padding-left: 2%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .nav-head-text {
@@ -184,7 +196,6 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
-    height: 25vh;
     align-items: center;
     padding: 25px;
 }
@@ -244,13 +255,13 @@ body {
 #photoCaption {
     background-color: #699b2c;
     color: white;
-    padding: 0px 10px;
+    padding: 3% 4%;
 }
 
 #postTitleContainer {
     background-color: #699b2c;
     color: white;
-    padding: 0px 10px;
+    padding: 3% 2%;
     text-align: center;
 }
 
@@ -261,6 +272,10 @@ body {
     background-color: #151C15;
     overflow: auto;
     border-radius: 5px;
+}
+
+#postMeta {
+    margin-bottom: 0px;
 }
 
 #profileName {
@@ -329,18 +344,18 @@ body {
     background-color: #699b2c;
     display: flex;
     flex-direction: row;
-    height: 25vh;
+    /* height: 25vh; */
     justify-content: space-evenly;
-    padding: 25px 0px;
+    padding: 10px 5px;
 }
 
 #profileInfo {
+    align-self: center;
     align-items: center;
     color: white;
     display: flex;
     text-align: center;
     flex-direction: column;
-    padding-top: 5%;
 }
 
 #uploadPhotoBtn {

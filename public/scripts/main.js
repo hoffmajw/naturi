@@ -63,7 +63,7 @@ rhit.HomePageController = class {
 					if (doc.exists) {
 							// console.log("Document data:", doc.data()[rhit.carIndex]);
 							// console.log(rhit.carIndex);
-							document.querySelector("#photoCaption").innerHTML = doc.data()[rhit.carIndex];
+							// document.querySelector("#photoCaption").innerHTML = doc.data()[rhit.carIndex];
 					} else {
 							// doc.data() will be undefined in this case
 							console.log("No such document!");
@@ -147,7 +147,7 @@ rhit.HomePageController = class {
 																	</div>`);
 																		
 
-		for(let i = 0; i < 7; i++) {
+		for(let i = 0; i < 5; i++) {
 			if(i < rhit.fbBlogPostsManager.length){
 				var p = rhit.fbBlogPostsManager.getPostAtIndex(i);
 				var newEntry = this._createEntry(p);
@@ -357,13 +357,10 @@ rhit.EditProfilePageController = class {
 						rhit.fbProfileManager.update(newName, newLoc, src);
 					})
 
-					reader.readAsDataURL(photoURL.files[0]);
-
-
-			rhit.fbProfileManager.update(newName, newLoc);
+					if(photoURL.files)
+						reader.readAsDataURL(photoURL.files[0]);
 		}
 
-		document.querySelector
 
 		rhit.fbProfileManager.beginListening(this.updateView.bind(this));
 	}
@@ -414,6 +411,7 @@ rhit.CreatePostPageController = class {
 			document.querySelector("#titleForm").value = " ";
 			document.querySelector("#locationForm").value = " ";
 			document.querySelector("#blogPostDesc").value = " ";
+			
 		}
 
 		document.querySelector("#cancelNewPost").onclick = event => {
@@ -451,11 +449,53 @@ rhit.PostPageController = class {
 			//checkForRedirects();
 		}
 
+		document.querySelector("#signUpDetailButton").onclick = (params) => {
+			const inputEmailEl = document.querySelector("#signUpInputEmail");
+			const inputPasswordEl = document.querySelector("#signUpInputPassword");
+			const confirmInputPasswordEl = document.querySelector("#signUpInputConfirmPassword");
+			const displayNameEl = document.querySelector("#signUpInputDisplayName");
+			const locEl = document.querySelector("#signUpInputLocation");
+			const photoURL = document.querySelector("#customFile");
+			
+			if(inputPasswordEl.value == confirmInputPasswordEl.value) {
+				console.log(`Create account for email: ${inputEmailEl.value} password: ${inputPasswordEl.value}`);
+				console.log("selected photo URL: ", photoURL.files[0]);
+
+				firebase.auth().createUserWithEmailAndPassword(inputEmailEl.value, inputPasswordEl.value)
+				.then((userCredential) => {
+					var newUserId = userCredential.user.uid;
+					// console.log(newUserId);
+					var reader = new FileReader();
+					var src = null;
+					reader.addEventListener("load", () => {
+						var aImg = new Image();
+						src = reader.result;
+						console.log(src);
+						this._uRef.doc(newUserId).set({
+							[rhit.FB_KEY_EMAIL]: inputEmailEl.value,
+							[rhit.FB_KEY_DISPLAY_NAME]: displayNameEl.value,
+							[rhit.FB_KEY_LOC]: locEl.value,
+							[rhit.FB_KEY_PROFILE_PIC]: src
+						})
+					})
+
+					reader.readAsDataURL(photoURL.files[0]);
+				})
+				.catch((error) => {
+					var errorCode = error.code;
+					var errorMessage = error.message;
+					console.log("create account error ", errorCode, errorMessage);
+				});
+			} else {
+				console.log("passwords do not match");
+			}	
+		}
+
 		document.querySelector("#confirmButton").onclick = (event) => {
 			const comm = document.querySelector("#addCommentForm").value;
 			const commAuthor = rhit.fbAuthManager.uName;
 			console.log("confirm btn clicked");
-			rhit.fbSinglePostManager.addComment(comm, commAuthor);
+			rhit.fbSinglePostManager.addComment(comm, commAuthor, this.updateView.bind(this));
 		}
 
 		rhit.fbSinglePostManager.beginListening(this.updateView.bind(this));
@@ -546,8 +586,6 @@ rhit.BlogPostsManager = class {
 			[rhit.FB_KEY_IMAGES]: [url],
 			[rhit.FB_KEY_TIMESTAMP]: firebase.firestore.Timestamp.now()
 		})
-
-		// window.location.href = `/createPost.html`;
 	}
 
 	beginListening(changeListener) {
@@ -620,16 +658,16 @@ rhit.SinglePostManager = class {
 				this._comments.push(com);
 			}
 			changeListener();
-		})
-		
+		})		
 	}
 
-	addComment(comm, commAuthor) {
+	addComment(comm, commAuthor, cb) {
 		firebase.firestore().collection(`${rhit.FB_COLLECTION_POSTS}/${this.pid}/Comments`).add({
 			[rhit.FB_KEY_COMMENT]: comm,
 			[rhit.FB_KEY_COMM_AUTHOR]: commAuthor,
 			[rhit.FB_KEY_TIMESTAMP]: firebase.firestore.Timestamp.now()
 		}).then((params) => {
+			window.location.href = window.location.href;
 			console.log("comm added");
 		}).catch((er) => {
 			console.log(err);
