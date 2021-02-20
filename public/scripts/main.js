@@ -944,7 +944,7 @@ rhit.ProfileManager = class {
 		return this._documentSnapshot.get(rhit.FB_KEY_EMAIL);
 	}
 }
-
+// 
 rhit.FbAuthManager = class {
 	constructor() {   
 		this._user = null;
