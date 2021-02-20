@@ -559,7 +559,7 @@ rhit.CreatePostPageController = class {
 			const postDet = document.querySelector("#blogPostDesc").value;
 			var imgSize = photoURLsEl.files[0].size;
 
-        	if(imgSize < 800000) {
+        	if(imgSize > 800000) {
          		alert("Chose a photo that is less than 800KB");
           		window.location.href = "/createPost.html";
           		return;
@@ -624,7 +624,7 @@ rhit.PostPageController = class {
 			const photoURL = document.querySelector("#customFile");
 			var imgSize = photoURL.files[0].size;
 
-        if(imgSize < 800000) {
+        if(imgSize > 800000) {
           alert("Chose a photo that is less than 800KB");
           window.location.href = "/index.html";
           return;
