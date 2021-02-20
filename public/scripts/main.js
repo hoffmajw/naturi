@@ -133,6 +133,16 @@ rhit.HomePageController = class {
 			// console.log(`Sign out`);
 			rhit.fbAuthManager.signOut();
 		}
+		
+		document.querySelector("#searchForm").addEventListener('keypress', function (e) {
+			if (e.key === 'Enter') {
+				console.log('submitting');
+				var searchTerm = document.querySelector("#searchForm").value;
+				sessionStorage.setItem("searchTerm", searchTerm);
+				console.log(searchTerm);
+				window.location.href = `/search.html`;
+			}
+		});
 
 		rhit.fbBlogPostsManager.beginListening(this.updateRecentBlogEntries.bind(this));
 	}
@@ -252,10 +262,10 @@ rhit.ProfilePageController = class {
 																						</ul>`);
 
 			var tmp = htmlToElement(`<li class="page-item">
-																<a class="page-link" href="#" aria-label="Previous">
-																	<span aria-hidden="true">&laquo;</span>
-																</a>
-															</li>`);
+										<a class="page-link" href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>`);
 											
 			tmp.onclick = (event) => {
 				if(this.postsPageIndex != 0){
@@ -270,24 +280,24 @@ rhit.ProfilePageController = class {
 			for(var i = 0; i < Math.floor(rhit.fbBlogPostsManager.length/4) + 1; i++) {
 				if(i == this.postsPageIndex) {
 					scrollEl.appendChild(htmlToElement(`<li class="page-item active">
-																								<a class="page-link" href="#">
-																									${i+1}
-																								</a>
-																							</li>`));
+															<a class="page-link" href="#">
+																${i+1}
+															</a>
+														</li>`));
 				} else {
 					scrollEl.appendChild(htmlToElement(`<li class="page-item">
-																								<a class="page-link" href="#">
-																									${i+1}
-																								</a>
-																							</li>`));
+															<a class="page-link" href="#">
+																${i+1}
+															</a>
+														</li>`));
 				}
 			}
 			
 			tmp = htmlToElement(`<li class="page-item">
-														<a class="page-link" href="#" aria-label="Next">
-															<span aria-hidden="true">&raquo;</span>
-														</a>
-													</li>`);
+									<a class="page-link" href="#" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>`);
 
 			tmp.onclick = (event) => {
 				if(this.postsPageIndex != Math.floor(rhit.fbBlogPostsManager.length/4)){
@@ -299,7 +309,7 @@ rhit.ProfilePageController = class {
 
 			scrollEl.appendChild(tmp);
 			const fullScrollEl = htmlToElement(`<nav id=recentBlogEntriesScroll>
-																					</nav>`);
+												</nav>`);
 			fullScrollEl.appendChild(scrollEl);
 			newList.appendChild(fullScrollEl);
 		}
@@ -314,18 +324,168 @@ rhit.ProfilePageController = class {
 
 	_createEntry(p) {
 		return htmlToElement(`<div class="recentBlogEntry">
-														<a><p class= "recent-entry-text">
-																<span>${p.loc}</span>&nbsp;
-																<span class="recent-entry-author">by ${p.authorDisplayName}</span>
-															</p>
-														</a>
-													</div>`)
+									<a><p class= "recent-entry-text">
+											<span>${p.loc}</span>&nbsp;
+											<span class="recent-entry-author">by ${p.authorDisplayName}</span>
+										</p>
+									</a>
+								</div>`)
 	}
 }
 
 rhit.SearchPageController = class {
 	constructor() {
+		this.postsPageIndex = 0;
 
+		if (rhit.fbAuthManager.isSignedIn) {
+			document.querySelector("#attemptLogIn").style.display = "none";
+			document.querySelector("#attemptSignUp").style.display = "none";
+			document.querySelector(".dropdown").style.display = "inline";
+		} else {
+			document.querySelector("#attemptLogIn").style.display = "inline-block";
+			document.querySelector("#attemptSignUp").style.display = "inline-block";
+			document.querySelector(".dropdown").style.display = "none";
+		}
+
+		document.getElementById("searchForm").placeholder = sessionStorage.getItem("searchTerm");
+
+		document.querySelector("#searchForm").addEventListener('keypress', function (e) {
+			if (e.key === 'Enter') {
+				console.log('submitting');
+				var searchTerm = document.querySelector("#searchForm");
+				sessionStorage.setItem("searchTerm", searchTerm);
+				console.log(searchTerm);
+				window.location.href = `/search.html`;
+			}
+		});
+
+		rhit.fbBlogPostsManager.beginListening(this.updateView.bind(this));
+	}
+	
+	updateView() {
+		//change blog posts
+		const newList = htmlToElement(`<div id=searchResults>
+											<h1 id="searchResultsHeader">Search Results</h1>
+										</div>`);
+
+		if(rhit.fbBlogPostsManager.length >= 1 && rhit.fbBlogPostsManager.length < 5) {
+			for(var i = this.postsPageIndex * 4; i < rhit.fbBlogPostsManager.length; i++) {
+				const p = rhit.fbBlogPostsManager.getPostAtIndex(i);
+				
+				if(p.loc == sessionStorage.getItem('searchTerm')) {
+					const newEntry = this._createEntry(p);
+	
+					newEntry.onclick = (event) => {
+						window.location.href = `/search.html?pid=${p.id}`;
+					}
+	
+					newList.appendChild(newEntry);
+				}
+			}
+
+			const scrollEl = htmlToElement(`<nav id="recentBlogEntriesScroll">
+												<ul class="pagination">
+													<li class="page-item active">
+														<a class="page-link href="#">1</a>
+													</li>
+												</ul>
+											</nav>`);
+
+			scrollEl.setAttribute("margin-top", "10px");
+			
+			newList.appendChild(scrollEl);
+		} else if(rhit.fbBlogPostsManager.length == 0) {
+			newList.appendChild(htmlToElement(`<div>No Posts Yet</div>`));
+		} else {
+			var postsAdded = 0;
+			for(var i = this.postsPageIndex * 4; i < rhit.fbBlogPostsManager.length; i++) {
+				const p = rhit.fbBlogPostsManager.getPostAtIndex(i);
+				
+				if(p.loc == sessionStorage.getItem('searchTerm')) {
+					const newEntry = this._createEntry(p);
+	
+					newEntry.onclick = (event) => {
+						window.location.href = `/postview.html?pid=${p.id}`;
+					}
+					if(postsAdded < 4){
+						newList.appendChild(newEntry);
+						postsAdded++;
+					} else break;
+				}
+			}
+			
+			const scrollEl = htmlToElement(`<ul class="pagination">
+											</ul>`);
+
+			var tmp = htmlToElement(`<li class="page-item">
+										<a class="page-link" href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>`);
+											
+			tmp.onclick = (event) => {
+				if(this.postsPageIndex != 0){
+					this.postsPageIndex--;
+					this.updateView();
+				}
+
+			}
+
+			scrollEl.appendChild(tmp);
+
+			for(var i = 0; i < Math.floor(rhit.fbBlogPostsManager.length/4) + 1; i++) {
+				if(i == this.postsPageIndex) {
+					scrollEl.appendChild(htmlToElement(`<li class="page-item active">
+															<a class="page-link" href="#">
+																${i+1}
+															</a>
+														</li>`));
+				} else {
+					scrollEl.appendChild(htmlToElement(`<li class="page-item">
+															<a class="page-link" href="#">
+																${i+1}
+															</a>
+														</li>`));
+				}
+			}
+			
+			tmp = htmlToElement(`<li class="page-item">
+										<a class="page-link" href="#" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>`);
+
+			tmp.onclick = (event) => {
+				if(this.postsPageIndex != Math.floor(rhit.fbBlogPostsManager.length/4)){
+					
+					this.postsPageIndex++;
+					this.updateView();
+				} 
+			}
+
+			scrollEl.appendChild(tmp);
+			const fullScrollEl = htmlToElement(`<nav id=recentBlogEntriesScroll>
+												</nav>`);
+			fullScrollEl.appendChild(scrollEl);
+			newList.appendChild(fullScrollEl);
+		}
+
+
+		const oldList = document.querySelector("#searchResults");
+		oldList.removeAttribute("id");
+		oldList.hidden = true;
+
+		oldList.parentElement.appendChild(newList);
+	}
+
+	_createEntry(p) {
+		return htmlToElement(`<div class="recentBlogEntry">
+									<a><p class= "recent-entry-text">
+											<span>${p.loc}</span>&nbsp;
+											<span class="recent-entry-author">by ${p.authorDisplayName}</span>
+										</p>
+									</a>
+								</div>`)
 	}
 }
 
@@ -397,7 +557,13 @@ rhit.CreatePostPageController = class {
 			const postLoc = document.querySelector("#locationForm").value;
 			const photoURLsEl = document.querySelector("#customFile");
 			const postDet = document.querySelector("#blogPostDesc").value;
+			var imgSize = photoURLsEl.files[0].size;
 
+        	if(imgSize < 800000) {
+         		alert("Chose a photo that is less than 800KB");
+          		window.location.href = "/createPost.html";
+          		return;
+        	} 
 			var reader = new FileReader();
 			var src = null;
 			reader.addEventListener("load", () => {
@@ -456,6 +622,13 @@ rhit.PostPageController = class {
 			const displayNameEl = document.querySelector("#signUpInputDisplayName");
 			const locEl = document.querySelector("#signUpInputLocation");
 			const photoURL = document.querySelector("#customFile");
+			var imgSize = photoURL.files[0].size;
+
+        if(imgSize < 800000) {
+          alert("Chose a photo that is less than 800KB");
+          window.location.href = "/index.html";
+          return;
+        }
 			
 			if(inputPasswordEl.value == confirmInputPasswordEl.value) {
 				console.log(`Create account for email: ${inputEmailEl.value} password: ${inputPasswordEl.value}`);
@@ -898,6 +1071,13 @@ rhit.initializePage = function () {
 		rhit.fbProfileManager = new rhit.ProfileManager(uid);
 		rhit.fbBlogPostsManager= new rhit.BlogPostsManager(uid);
 		new rhit.ProfilePageController();
+	}
+
+	if(document.querySelector("#searchPage")){
+		console.log("on search page");
+		const uid = urlParams.get('uid');
+		rhit.fbBlogPostsManager= new rhit.BlogPostsManager(uid);
+		new rhit.SearchPageController();
 	}
 
 	if(document.querySelector("#profileEditPage")) {
