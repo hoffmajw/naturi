@@ -89,6 +89,13 @@ rhit.HomePageController = class {
 			if(inputPasswordEl.value == confirmInputPasswordEl.value) {
 				console.log(`Create account for email: ${inputEmailEl.value} password: ${inputPasswordEl.value}`);
 				console.log("selected photo URL: ", photoURL.files[0]);
+				var imgSize = photoURL.files[0].size;
+				console.log(imgSize);
+					if(imgSize > 800000) {
+						alert("Chose a photo that is less than 800KB");
+						window.location.href = "/index.html";
+						return;
+					}
 
 				firebase.auth().createUserWithEmailAndPassword(inputEmailEl.value, inputPasswordEl.value)
 				.then((userCredential) => {
@@ -508,7 +515,13 @@ rhit.EditProfilePageController = class {
 			const newName = document.querySelector("#newDisplayNameForm").value;
 			const newLoc = document.querySelector("#newLocationForm").value;
 			const photoURL = document.querySelector("#customFile");
-			
+			var imgSize = photoURL.files[0].size;
+			console.log(imgSize);
+        if(imgSize > 800000) {
+          alert("Chose a photo that is less than 800KB");
+          window.location.href = "/index.html";
+          return;
+        }
 			var reader = new FileReader();
 					var src = null;
 					reader.addEventListener("load", () => {
@@ -559,7 +572,7 @@ rhit.CreatePostPageController = class {
 			const postDet = document.querySelector("#blogPostDesc").value;
 			var imgSize = photoURLsEl.files[0].size;
 
-        	if(imgSize < 800000) {
+        	if(imgSize > 800000) {
          		alert("Chose a photo that is less than 800KB");
           		window.location.href = "/createPost.html";
           		return;
@@ -588,6 +601,7 @@ rhit.CreatePostPageController = class {
 
 rhit.PostPageController = class {
 	constructor() {
+		this._uRef = firebase.firestore().collection(rhit.FB_COLLECTION_USERS);
 		if (rhit.fbAuthManager.isSignedIn) {
 			document.querySelector("#attemptLogIn").style.display = "none";
 			document.querySelector("#attemptSignUp").style.display = "none";
@@ -623,8 +637,8 @@ rhit.PostPageController = class {
 			const locEl = document.querySelector("#signUpInputLocation");
 			const photoURL = document.querySelector("#customFile");
 			var imgSize = photoURL.files[0].size;
-
-        if(imgSize < 800000) {
+			console.log(imgSize);
+        if(imgSize > 800000) {
           alert("Chose a photo that is less than 800KB");
           window.location.href = "/index.html";
           return;
